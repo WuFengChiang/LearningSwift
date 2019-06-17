@@ -22,4 +22,16 @@ class LearningSwiftTests: XCTestCase {
         XCTAssertEqual(16, 0x10)
         XCTAssertEqual(16, 0x1p4)
     }
+    
+    func testTypeInference() {
+        let integer1 = 7
+        let integer2: Int = 8
+        XCTAssertTrue(type(of: integer1) == type(of: integer2))
+        
+        let float1 = 1.0
+        let float2: Float = 1.0
+        let float3: Double = 1.0
+        XCTAssertFalse(type(of: float1) == type(of: float2))
+        XCTAssertTrue(type(of: float1) == type(of: float3))
+    }
 }
