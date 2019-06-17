@@ -16,5 +16,6 @@ class LearningSwiftTests: XCTestCase {
 
     func testIntExpression() {
         XCTAssertEqual(10000000, 1000_0000)
+        XCTAssertEqual(10000000, 1.0e7)
     }
 }
