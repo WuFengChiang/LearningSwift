@@ -38,4 +38,18 @@ class LearningSwiftTests: XCTestCase {
     func testMaxInt() {
         XCTAssertEqual(9223372036854775807, Int.max)
     }
+    
+    func testIfElse() {
+        let score = 55
+        func testResult() -> String {
+            if score < 40 {
+                return "死當"
+            } else if score >= 40, score < 60 {
+                return "活當"
+            } else {
+                return "pass"
+            }
+        }
+        XCTAssertEqual(testResult(), "活當")
+    }
 }
