@@ -34,4 +34,8 @@ class LearningSwiftTests: XCTestCase {
         XCTAssertFalse(type(of: float1) == type(of: float2))
         XCTAssertTrue(type(of: float1) == type(of: float3))
     }
+    
+    func testMaxInt() {
+        XCTAssertEqual(9223372036854775807, Int.max)
+    }
 }
