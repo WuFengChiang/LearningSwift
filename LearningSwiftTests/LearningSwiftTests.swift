@@ -67,4 +67,18 @@ class LearningSwiftTests: XCTestCase {
         }
         XCTAssertEqual(functionWithSwitch(), "活當")
     }
+    
+    func testArrayRevese() {
+        let avengers = ["Iron man",
+                        "American captain",
+                        "Thor"]
+        let reversedAvengers = ["Thor",
+                                "American captain",
+                                "Iron man"]
+        let disorderAvengers = ["American captain",
+                                "Thor",
+                                "Iron man"]
+        XCTAssertEqual(avengers.reversed(), reversedAvengers)
+        XCTAssertTrue(avengers.reversed() != disorderAvengers)   
+    }
 }
