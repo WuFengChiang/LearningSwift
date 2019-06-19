@@ -41,7 +41,7 @@ class LearningSwiftTests: XCTestCase {
     
     func testIfElse() {
         let score = 55
-        func testResult() -> String {
+        func functionWithIfElse() -> String {
             if score < 40 {
                 return "死當"
             } else if score >= 40, score < 60 {
@@ -50,6 +50,21 @@ class LearningSwiftTests: XCTestCase {
                 return "pass"
             }
         }
-        XCTAssertEqual(testResult(), "活當")
+        XCTAssertEqual(functionWithIfElse(), "活當")
+    }
+    
+    func testSwitch() {
+        let score = 55
+        func functionWithSwitch() -> String {
+            switch score {
+            case 0...39:
+                return "死當"
+            case 40...59:
+                return "活當"
+            default:
+                return "pass"
+            }
+        }
+        XCTAssertEqual(functionWithSwitch(), "活當")
     }
 }
