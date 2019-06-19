@@ -79,6 +79,27 @@ class LearningSwiftTests: XCTestCase {
                                 "Thor",
                                 "Iron man"]
         XCTAssertEqual(avengers.reversed(), reversedAvengers)
-        XCTAssertTrue(avengers.reversed() != disorderAvengers)   
+        XCTAssertTrue(avengers.reversed() != disorderAvengers)
+    }
+    
+    func testFaceClass() {
+        class Face {
+            var leftEye: Eye!
+            var rightEye: Eye!
+            private var isClosedEye = true
+            
+            func closeEyes() {
+                isClosedEye = false
+            }
+            func isCloseEye() -> Bool {
+                return isClosedEye
+            }
+        }
+        class Eye {}
+        
+        let face = Face()
+        XCTAssertEqual(face.isCloseEye(), true)
+        face.closeEyes()
+        XCTAssertEqual(face.isCloseEye(), false)
     }
 }
