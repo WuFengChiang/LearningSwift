@@ -102,4 +102,25 @@ class LearningSwiftTests: XCTestCase {
         face.closeEyes()
         XCTAssertEqual(face.isCloseEye(), false)
     }
+    
+    func testIsA() {
+        class Phone {
+            var ownNumber: String!
+            private var rj11Connector: Any!
+            func call(number: String) -> String {
+                return "call \(number)"
+            }
+        }
+        class iPhone: Phone {
+            func surfing() {}
+        }
+        
+        let myiPhone = iPhone()
+        myiPhone.ownNumber = "0999999999"
+        
+        /* 'rj11Connector' is inaccessible due to 'private' protection level*/
+        //myiPhone.rj11Connector
+        
+        XCTAssertEqual("call 28825252", myiPhone.call(number: "28825252"))
+    }
 }
