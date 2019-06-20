@@ -126,27 +126,19 @@ class LearningSwiftTests: XCTestCase {
     
     func testHasA() {
         
-        let myIPhone = iPhone()
-        myIPhone.url = "https://awebsite.net"
-        XCTAssertTrue(myIPhone.surfing().hasPrefix("<html>"))
-        
-        class WifiInterface {
-            var result: String!
-            func surfing(url: String) {
-                self.result = """
-                <html>
-                    <body> Some content. </body>
-                </html>
-                """
+        let myiPhone = iPhone()
+        XCTAssertEqual("call 28825252", myiPhone.call(number: "28825252"))
+
+        class Phone {
+            func call(number: String) -> String {
+                return "call \(number)"
             }
         }
-        class Phone {}
-        class iPhone: Phone {
-            private let wifiInterface: WifiInterface = WifiInterface()
-            var url: String!
-            func surfing() -> String {
-                wifiInterface.surfing(url: url)
-                return wifiInterface.result
+        class iPhone {
+            let phone = Phone()
+            func surfing() {}
+            func call(number: String) -> String {
+                return phone.call(number: number)
             }
         }
     }
