@@ -168,6 +168,54 @@ class LearningSwiftTests: XCTestCase {
             }
         }
     }
+    
+    func testDelegate() {
+        
+        let burgerStand = BurgerStand()
+        burgerStand.sellBurger()
+        
+        class BurgerStand: BurgerMakerDelegate {
+            let burgerMaker = BurgerMaker()
+            
+            func sellBurger() {
+                burgerMaker.delegate = self
+                burgerMaker.make()
+            }
+            
+            // MARK: - BurgerMakerDelegate functions
+            func spread() {
+                print("健康取向：一點點醬")
+            }
+            func addPickled() {
+                print("日本鄉土極品醃黃瓜")
+            }
+            func addPatty() {
+                print("安格斯黑毛牛肉")
+            }
+        }
+        
+        class BurgerMaker {
+            public var delegate: BurgerMakerDelegate!
+            private func heat() { print("單純地加熱1分鐘") }
+            private func spread() { delegate.spread() }
+            private func addPickled() { delegate.addPickled() }
+            private func addPatty() { delegate.addPatty() }
+            private func addLettuce() { print("單純地鋪上美生菜") }
+            public func make() {
+                heat()
+                spread()
+                addPickled()
+                addPatty()
+                addLettuce()
+            }
+        }
+    }
+}
+
+protocol BurgerMakerDelegate {
+    func spread()
+    func addPickled()
+    func addPatty()
 }
 
 protocol InternetAccessible {
