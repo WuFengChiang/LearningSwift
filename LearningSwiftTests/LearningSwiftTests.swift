@@ -210,6 +210,16 @@ class LearningSwiftTests: XCTestCase {
             }
         }
     }
+    
+    func testLet() {
+        class Face {
+            var length: Int!
+        }
+        let aFace = Face()
+        aFace.length = 10
+        aFace.length = 15 // aFace 不可變，但是 length 可變哦
+        XCTAssertTrue(aFace.length == 15)
+    }
 }
 
 protocol BurgerMakerDelegate {
