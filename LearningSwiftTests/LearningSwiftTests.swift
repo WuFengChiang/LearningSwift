@@ -142,4 +142,34 @@ class LearningSwiftTests: XCTestCase {
             }
         }
     }
+    
+    func testProtocol() {
+        
+        let man = Man()
+        
+        let iPhone = IPhone()
+        man.deviceForSurfing = iPhone
+        man.surfing()
+        
+        class Man {
+            var deviceForSurfing: InternetAccessible!
+            func surfing() {
+                deviceForSurfing.surfing()
+            }
+        }
+        class IPhone: InternetAccessible {
+            func surfing() {
+                print("用 iPhone 上網")
+            }
+        }
+        class MBP: InternetAccessible {
+            func surfing() {
+                print("用 MBP 上網")
+            }
+        }
+    }
+}
+
+protocol InternetAccessible {
+    func surfing()
 }
