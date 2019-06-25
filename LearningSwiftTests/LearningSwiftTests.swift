@@ -340,6 +340,30 @@ class LearningSwiftTests: XCTestCase {
                        天氣又變熱了呢!
                        """)
     }
+    
+    func testComplexPropertyWithClosure() {
+        class MyUI {
+            var passwordTextField: UITextField = {
+                let result = UITextField()
+                result.isSecureTextEntry = true
+                result.keyboardType = .numberPad
+                return result
+            }()
+        }
+        XCTAssertTrue(MyUI().passwordTextField.isSecureTextEntry)
+    }
+    
+    func testCompareToPropertyWithClosure() {
+        class MyUI {
+            var passwordTextField: UITextField {
+                let result = UITextField()
+                result.isSecureTextEntry = true
+                result.keyboardType = .numberPad
+                return result
+            }
+        }
+        XCTAssertTrue(MyUI().passwordTextField.isSecureTextEntry)
+    }
 }
 
 protocol BurgerMakerDelegate {
