@@ -252,6 +252,17 @@ class LearningSwiftTests: XCTestCase {
         }
         XCTAssertEqual("Super", Sub().method1())
     }
+    
+    func testOverload() {
+        class Member {
+            init(withEmail: String){}
+            init(phoneNumber: String) {}
+        }
+        let aMember = Member(withEmail: "my@email.com")
+        let anotherMember = Member(phoneNumber: "0930000000")
+        XCTAssertNotNil(aMember)
+        XCTAssertNotNil(anotherMember)
+    }
 }
 
 protocol BurgerMakerDelegate {
