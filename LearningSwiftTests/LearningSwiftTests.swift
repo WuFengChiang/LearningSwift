@@ -220,6 +220,24 @@ class LearningSwiftTests: XCTestCase {
         aFace.length = 15 // aFace 不可變，但是 length 可變哦
         XCTAssertTrue(aFace.length == 15)
     }
+    
+    func testInitializer() {
+        class Account {
+            var email: String
+            var password: String
+            
+            init(email _email: String, password _password: String = "0000") {
+                self.email = _email
+                self.password = _password
+            }
+        }
+        let aNewAccount = Account(email: "my@email.com",
+                                  password: "xO8P9zBB")
+        XCTAssertEqual("my@email.com", aNewAccount.email)
+
+        let anotherAccount = Account(email: "my2@email.com")
+        XCTAssertEqual("0000", anotherAccount.password)
+    }
 }
 
 protocol BurgerMakerDelegate {
