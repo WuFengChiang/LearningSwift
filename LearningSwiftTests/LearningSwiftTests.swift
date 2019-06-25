@@ -279,6 +279,19 @@ class LearningSwiftTests: XCTestCase {
         let aMember = Member(name: "me", email: "me@icloud.com")
         XCTAssertNil(aMember.password)
     }
+    
+    func testComputedProperty() {
+        class Circle {
+            var radius: Float
+            var area: Float {
+                return radius * radius * 3.14
+            }
+            init(radius: Float) {
+                self.radius = radius
+            }
+        }
+        XCTAssertEqual(Circle(radius: 10).area, 314)
+    }
 }
 
 protocol BurgerMakerDelegate {
