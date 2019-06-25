@@ -292,6 +292,23 @@ class LearningSwiftTests: XCTestCase {
         }
         XCTAssertEqual(Circle(radius: 10).area, 314)
     }
+    
+    func testComplexComputedProperty() {
+        class Circle {
+            var radius: Float!
+            var area: Float {
+                get {
+                    return radius * radius * 3.14
+                }
+                set {
+                    radius = sqrt(newValue / 3.14) as Float
+                }
+            }
+        }
+        let aCircle = Circle()
+        aCircle.area = 314
+        XCTAssertEqual(aCircle.radius, 10)
+    }
 }
 
 protocol BurgerMakerDelegate {
