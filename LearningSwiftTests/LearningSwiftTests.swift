@@ -238,6 +238,20 @@ class LearningSwiftTests: XCTestCase {
         let anotherAccount = Account(email: "my2@email.com")
         XCTAssertEqual("0000", anotherAccount.password)
     }
+    
+    func testOverride() {
+        class Super {
+            func method1() -> String {
+                return "Super"
+            }
+        }
+        class Sub: Super {
+            override func method1() -> String {
+                return super.method1()
+            }
+        }
+        XCTAssertEqual("Super", Sub().method1())
+    }
 }
 
 protocol BurgerMakerDelegate {
