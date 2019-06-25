@@ -263,6 +263,22 @@ class LearningSwiftTests: XCTestCase {
         XCTAssertNotNil(aMember)
         XCTAssertNotNil(anotherMember)
     }
+    
+    func testStoredProperty() {
+        class Member {
+            let name: String
+            let email: String!
+            let password: String?
+            let registerTime = Date()
+            init(name: String, email:String) {
+                self.name = name
+                self.email = email
+                self.password = nil
+            }
+        }
+        let aMember = Member(name: "me", email: "me@icloud.com")
+        XCTAssertNil(aMember.password)
+    }
 }
 
 protocol BurgerMakerDelegate {
