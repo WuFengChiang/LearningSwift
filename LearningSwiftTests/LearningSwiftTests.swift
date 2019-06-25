@@ -309,6 +309,37 @@ class LearningSwiftTests: XCTestCase {
         aCircle.area = 314
         XCTAssertEqual(aCircle.radius, 10)
     }
+    
+    func testPropertyObservers() {
+        class 恒溫器 {
+            var log: String!
+            var temperature: Float = 27 {
+                willSet(感測到的新溫度) {
+                    log = """
+                    原來的溫度為：\(temperature)
+                    感測到新的溫度為：\(感測到的新溫度)
+                    """
+                }
+                didSet {
+                    if temperature > oldValue {
+                        log = """
+                        \(log!)
+                        天氣又變熱了呢!
+                        """
+                    }
+                }
+            }
+        }
+        let 一個恒溫器  = 恒溫器()
+        一個恒溫器.temperature = 35.7
+        
+        XCTAssertEqual(一個恒溫器.log!,
+                       """
+                       原來的溫度為：27.0
+                       感測到新的溫度為：35.7
+                       天氣又變熱了呢!
+                       """)
+    }
 }
 
 protocol BurgerMakerDelegate {
