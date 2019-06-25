@@ -364,6 +364,21 @@ class LearningSwiftTests: XCTestCase {
         }
         XCTAssertTrue(MyUI().passwordTextField.isSecureTextEntry)
     }
+    
+    func testLazyLoading() {
+        class ComplexARComponent {}
+        class MyApp {
+            var log: String?
+            lazy var component: ComplexARComponent = {
+                log = "component was created."
+                return ComplexARComponent()
+            }()
+        }
+        let app = MyApp()
+        XCTAssertNil(app.log)
+        let _ = app.component
+        XCTAssertEqual(app.log!, "component was created.")
+    }
 }
 
 protocol BurgerMakerDelegate {
