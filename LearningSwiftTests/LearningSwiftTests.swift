@@ -434,6 +434,32 @@ class LearningSwiftTests: XCTestCase {
             return Int(sqrt(Double(rawScore)) * 10.0)
         }))
     }
+    
+    func testClosureAsReturnType() {
+        func getTranslator(from: String, to: String) -> ((String) -> String) {
+            let chineseToEnglish: (String) -> String = { (word) in
+                if word == "您好" {
+                    return "Hello"
+                }
+                return "無法翻譯"
+            }
+            func chineseToNihongo(word: String) -> String {
+                if word == "您好" {
+                    return "こんちは"
+                }
+                return "無法翻譯"
+            }
+            if from == "中" && to == "英" {
+                return chineseToEnglish
+            } else if from == "中" && to == "日" {
+                return chineseToNihongo
+            }
+            return {(String) -> String in return "無法翻譯"}
+        }
+        let translator = getTranslator(from: "中", to: "英")
+        XCTAssertTrue(translator("您好") == "Hello")
+        XCTAssertTrue(translator("大家好") == "無法翻譯")
+    }
 }
 
 protocol BurgerMakerDelegate {
