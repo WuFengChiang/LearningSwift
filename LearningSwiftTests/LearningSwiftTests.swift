@@ -379,6 +379,30 @@ class LearningSwiftTests: XCTestCase {
         let _ = app.component
         XCTAssertEqual(app.log!, "component was created.")
     }
+    
+    func testClosureExpression() {
+        class MyUI {
+            let closureForPasswordTextField: () -> UITextField = {
+                () -> UITextField in
+                let result = UITextField()
+                result.isSecureTextEntry = true
+                result.keyboardType = .numberPad
+                return result
+            }
+            var passwordTextField: UITextField
+            init() {
+                passwordTextField = closureForPasswordTextField()
+            }
+        }
+        XCTAssertTrue(MyUI().passwordTextField.isSecureTextEntry)
+    }
+    
+    func testSimpleClosure() {
+        let aClosure: (String) -> String = { (name) in
+            return "Hello, \(name)"
+        }
+        XCTAssertEqual("Hello, Tony", aClosure("Tony"))
+    }
 }
 
 protocol BurgerMakerDelegate {
