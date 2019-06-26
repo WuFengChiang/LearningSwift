@@ -403,6 +403,37 @@ class LearningSwiftTests: XCTestCase {
         }
         XCTAssertEqual("Hello, Tony", aClosure("Tony"))
     }
+    
+    func testClosureAsFunctionParameter() {
+        func doesPass(score: Int) -> Bool {
+            if score >= 60 {
+                return true
+            }
+            return false
+        }
+        XCTAssertFalse(doesPass(score: 59))
+        
+        func doesPassVersion2(score: Int) -> Bool {
+            if teacherzMagic(score) >= 60 {
+                return true
+            }
+            return false
+        }
+        func teacherzMagic(_ score: Int) -> Int {
+            return Int(sqrt(Double(score)) * 10.0)
+        }
+        XCTAssertTrue(doesPassVersion2(score: 36))
+        
+        func doesPassVersion3(score: Int, algorithm: (Int)->Int) -> Bool {
+            if algorithm(score) >= 60 {
+                return true
+            }
+            return false
+        }
+        XCTAssertTrue(doesPassVersion3(score: 36, algorithm: { (rawScore) -> Int in
+            return Int(sqrt(Double(rawScore)) * 10.0)
+        }))
+    }
 }
 
 protocol BurgerMakerDelegate {
