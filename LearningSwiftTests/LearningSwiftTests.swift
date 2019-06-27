@@ -506,6 +506,40 @@ class LearningSwiftTests: XCTestCase {
         XCTAssertEqual("女士", gender.toChinese())
         XCTAssertEqual(1, gender.rawValue)
     }
+    
+    func testErrorHandling() {
+        func checkAccount(_ account: String, andPassword password: String) throws {
+            guard account == "StudioA" else {
+                throw LoginError.accountNotExist
+            }
+            guard password == "1234567" else {
+                throw LoginError.passwordNotMatch
+            }
+        }
+        
+        func doLogin(account: String, password: String) throws -> String {
+            try checkAccount(account, andPassword: password)
+            return "Login success."
+        }
+        
+        enum LoginError: Error {
+            case accountNotExist
+            case passwordNotMatch
+            case suspended
+        }
+        
+        var result: String
+        do {
+            result = try doLogin(account: "StudioA", password: "1234567")
+        } catch LoginError.accountNotExist {
+            result = "Account no exist."
+        } catch LoginError.passwordNotMatch {
+            result = "Password is wrong."
+        } catch {
+            result = "Account has suspended."
+        }
+        XCTAssertEqual(result, "Login success.")
+    }
 }
 
 extension String {
