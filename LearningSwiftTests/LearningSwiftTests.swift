@@ -460,6 +460,16 @@ class LearningSwiftTests: XCTestCase {
         XCTAssertTrue(translator("您好") == "Hello")
         XCTAssertTrue(translator("大家好") == "無法翻譯")
     }
+    
+    func testExtension() {
+        XCTAssertEqual(100, "100".toInt())
+    }
+}
+
+extension String {
+    func toInt() -> Int {
+        return Int(self) ?? 0
+    }
 }
 
 protocol BurgerMakerDelegate {
