@@ -464,6 +464,48 @@ class LearningSwiftTests: XCTestCase {
     func testExtension() {
         XCTAssertEqual(100, "100".toInt())
     }
+    
+    func testEnum() {
+        enum CompassPoint {
+            case north
+            case south
+            case east
+            case west
+        }
+        var directionToHead = CompassPoint.west
+        XCTAssertTrue("\(type(of: directionToHead))" == "CompassPoint")
+        
+        directionToHead = .north
+        var result: String
+        switch directionToHead {
+        case .north:
+            result = "north"
+        case .south:
+            result = "south"
+        case .east:
+            result = "east"
+        case .west:
+            result = "west"
+        }
+        XCTAssertEqual("north", result)
+    }
+    
+    func testEnumHasFunctionAndRawValue() {
+        enum Gender: Int {
+            case MALE
+            case FEMALE
+            func toChinese() -> String {
+                if (self == .MALE) {
+                    return "男士"
+                } else {
+                    return "女士"
+                }
+            }
+        }
+        let gender: Gender = .FEMALE
+        XCTAssertEqual("女士", gender.toChinese())
+        XCTAssertEqual(1, gender.rawValue)
+    }
 }
 
 extension String {
