@@ -556,6 +556,24 @@ class LearningSwiftTests: XCTestCase {
         }
         XCTAssertEqual(result, "Login success.")
     }
+    
+    func testMemoryManagementIssues() {
+        func aFunction() {
+            let aTemporaryVariable = 100
+            XCTAssertNotNil(aTemporaryVariable)
+        }
+        //XCTAssertNil(aTemporaryVariable) //Use of unresolved identifier 'aTemporaryVariable'
+        
+        class Class1 {
+            let aProperty = 100
+            func getPropertyDouble() -> Int {
+                return aProperty * 2
+            }
+        }
+        //XCTAssertNil(aProperty)   //Use of unresolved identifier 'aProperty'
+        XCTAssertEqual(100, Class1().aProperty)
+        XCTAssertEqual(200, Class1().getPropertyDouble())
+    }
 }
 
 extension String {
