@@ -573,6 +573,40 @@ class LearningSwiftTests: XCTestCase {
         //XCTAssertNil(aProperty)   //Use of unresolved identifier 'aProperty'
         XCTAssertEqual(100, Class1().aProperty)
         XCTAssertEqual(200, Class1().getPropertyDouble())
+
+        class Person {
+            var bestFriend: Person!
+        }
+        var daisy:Person? = Person()
+        let lucy = Person()
+        daisy?.bestFriend = lucy
+        lucy.bestFriend = daisy
+        daisy = nil
+        XCTAssertNotNil(lucy.bestFriend)
+        
+        class Person2 {
+            weak var bestFriend: Person2!
+        }
+        var john:Person2? = Person2()
+        let tom = Person2()
+        john?.bestFriend = tom
+        tom.bestFriend = john
+        john = nil
+        XCTAssertNil(tom.bestFriend)
+        
+        class Student {
+            var contact: Contact!
+        }
+        class Contact {
+            weak var student: Student!
+        }
+        var kent: Student? = Student()
+        let contactOfKent = Contact()
+        kent?.contact = contactOfKent
+        contactOfKent.student = kent
+        
+        kent = nil
+        XCTAssertNil(contactOfKent.student)
     }
 }
 
