@@ -608,6 +608,42 @@ class LearningSwiftTests: XCTestCase {
         kent = nil
         XCTAssertNil(contactOfKent.student)
     }
+    
+    func testOptionalChainingAndBinding() {
+        class MyView {
+            var button: UIButton?
+        }
+        let myView = MyView()
+
+        myView.button?.titleLabel?.text = "OK"
+        XCTAssertNil(myView.button?.titleLabel?.text)
+        XCTAssertNil(myView.button?.titleLabel)
+        XCTAssertNil(myView.button)
+        
+        if myView.button == nil {
+            myView.button = UIButton()
+        }
+
+        myView.button?.titleLabel?.text = "OK"
+        XCTAssertEqual("OK", myView.button?.titleLabel?.text)
+        
+        let myView2 = MyView()
+        if let button = myView2.button {
+            // button 可用
+            button.titleLabel?.text = "OK"
+        } else {
+            myView2.button = UIButton()
+            myView2.button?.titleLabel?.text = "OK"
+        }
+        
+        let myView3 = MyView()
+        guard let button = myView3.button else {
+            return
+        }
+        // button 可用
+        button.titleLabel?.text = "OK"
+        assertionFailure()
+    }
 }
 
 extension String {
