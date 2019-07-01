@@ -341,6 +341,22 @@ class LearningSwiftTests: XCTestCase {
                        """)
     }
     
+    func testPropertyObserversAreNotExecutedByInitializer() {
+        class ParkingSpace {
+            var vacancy: Int = 100
+            var using: Int {
+                didSet { vacancy -= using }
+            }
+            init(using: Int) {
+                self.using = using
+            }
+        }
+        let parkingSpace = ParkingSpace(using: 2)
+        XCTAssertEqual(100, parkingSpace.vacancy)
+        parkingSpace.using += 1
+        XCTAssertEqual(97, parkingSpace.vacancy)
+    }
+    
     func testComplexPropertyWithClosure() {
         class MyUI {
             var passwordTextField: UITextField = {
