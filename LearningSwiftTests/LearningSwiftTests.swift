@@ -86,10 +86,10 @@ class LearningSwiftTests: XCTestCase {
         class Face {
             var leftEye: Eye!
             var rightEye: Eye!
-            private var isClosedEye = true
+            private var isClosedEye = false
             
             func closeEyes() {
-                isClosedEye = false
+                isClosedEye = true
             }
             func isCloseEye() -> Bool {
                 return isClosedEye
@@ -98,9 +98,9 @@ class LearningSwiftTests: XCTestCase {
         class Eye {}
         
         let face = Face()
-        XCTAssertEqual(face.isCloseEye(), true)
-        face.closeEyes()
         XCTAssertEqual(face.isCloseEye(), false)
+        face.closeEyes()
+        XCTAssertEqual(face.isCloseEye(), true)
     }
     
     func testIsA() {
